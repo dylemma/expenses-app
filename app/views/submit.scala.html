@@ -1,0 +1,67 @@
+@main("Submit"){
+
+	<div class="row">
+		<div class="col-xs-12">
+
+			<script src='@routes.WebJarAssets.at(WebJarAssets.locate("require.min.js"))'
+				data-main='@routes.Assets.at("javascripts/submit.js")'></script>
+
+			<table id="receiptsTable" class="table">
+				<thead>
+					<tr>
+						<th>Location</th>
+						<th>Category</th>
+						<th>Price</th>
+						<th>Date</th>
+						<th>Note</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+
+			<hr/>
+
+			<form id="expenseForm" role="form">
+
+				<!-- Location Input -->
+				<div class="form-group">
+					<label for="inputLocation" class="control-label">Location</label>
+					<input required type="text" class="form-control" id="inputLocation" placeholder="Location"/>
+				</div>
+
+				<!-- Category Input -->
+				<div class="form-group">
+					<label for="inputCategory" class="control-label">Category</label>
+					<input required type="text" class="form-control" id="inputCategory" placeholder="Category"/>
+				</div>
+
+				<!-- Price Input -->
+				<div class="form-group">
+					<label for="inputPrice" class="control-label">Price</label>
+					<div class="input-group">
+						<div class="input-group-addon">$</div>
+						<input required type="number" step="any" class="form-control" id="inputPrice" placeholder="Price"/>
+					</div>
+				</div>
+
+				<!-- Date Input -->
+				<div class="form-group">
+					<label for="inputDate" class="control-label">Date</label>
+					<input required type="date" class="form-control" id="inputDate"/>
+				</div>
+
+				<!-- Note Input -->
+				<div class="form-group">
+					<label for="inputNote" class="control-label">Note</label>
+					<textarea class="form-control" rows="2" id="inputNote" placeholder="An optional note about the purchase"></textarea>
+				</div>
+
+				<!-- Submit Button -->
+				<button type="submit" class="btn btn-primary" id="buttonSubmit">Submit</button>
+
+			</form>
+
+		</div>
+	</div>
+
+}
