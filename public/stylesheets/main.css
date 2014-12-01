@@ -1,0 +1,6 @@
+.flash {
+	background-color: orange;
+}
+.flashFade {
+	transition: background-color 2s linear;
+}

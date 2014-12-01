@@ -6,21 +6,6 @@
 			<script src='@routes.WebJarAssets.at(WebJarAssets.locate("require.min.js"))'
 				data-main='@routes.Assets.at("javascripts/submit.js")'></script>
 
-			<table id="receiptsTable" class="table">
-				<thead>
-					<tr>
-						<th>Location</th>
-						<th>Category</th>
-						<th>Price</th>
-						<th>Date</th>
-						<th>Note</th>
-					</tr>
-				</thead>
-				<tbody></tbody>
-			</table>
-
-			<hr/>
-
 			<form id="expenseForm" role="form">
 
 				<!-- Location Input -->
@@ -60,6 +45,21 @@
 				<button type="submit" class="btn btn-primary" id="buttonSubmit">Submit</button>
 
 			</form>
+
+			<hr/>
+
+			<table id="receiptsTable" class="table">
+				<thead>
+					<tr>
+						<th>Location</th>
+						<th>Category</th>
+						<th>Price</th>
+						<th>Date</th>
+						<th>Note</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
 
 		</div>
 	</div>

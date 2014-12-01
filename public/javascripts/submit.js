@@ -102,7 +102,7 @@ require(['bootstrap', 'jquery', 'Bacon', 'underscorejs', './receiptsList'], func
 			dataType: 'json',
 			contentType: 'application/json',
 			success: function(receipt){
-				receiptsList.add(receipt)
+				receiptsList.add(receipt, true /*flashy*/)
 				_.forEach(inputs, function(input){
 					input.clear()
 				})
