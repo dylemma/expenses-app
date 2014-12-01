@@ -18,9 +18,20 @@ require(['bootstrap', 'jquery', 'Bacon', 'underscorejs', './receiptsList'], func
 	Set up the `changes` stream on each of the `inputs` objects.
 	*/
 	_.forEach(inputs, function(input, key){
-		input.changes = input.el
-			.asEventStream('input')
-			.map(function(){ return input.el.val() })
+		var clears = new Bacon.Bus()
+
+		input.clear = function(){
+			input.el.val('')
+			clears.push('clear')
+		}
+
+		var clearChanges = clears.map(function(){
+			return { trigger: 'clear', value: input.el.val() }
+		})
+		var inputChanges = input.el.asEventStream('input').map(function(){
+			return { trigger: 'input', value: input.el.val() }
+		})
+		input.changes = inputChanges.merge(clearChanges)
 	})
 
 	/*
@@ -29,9 +40,11 @@ require(['bootstrap', 'jquery', 'Bacon', 'underscorejs', './receiptsList'], func
 	_.forEach(inputs, function(input, key){
 		if(input.required){
 			var $parent = input.el.closest('.form-group')
-			input.changes.onValue(function(value){
-				$parent.toggleClass('has-success', !!value)
-				$parent.toggleClass('has-error', !value)
+			input.changes.onValue(function(change){
+				var hasError = change.trigger == 'clear' ? false : !change.value
+				var hasSuccess = change.trigger == 'clear' ? false : !!change.value
+				$parent.toggleClass('has-success', hasSuccess)
+				$parent.toggleClass('has-error', hasError)
 			})
 		}
 	})
@@ -43,7 +56,7 @@ require(['bootstrap', 'jquery', 'Bacon', 'underscorejs', './receiptsList'], func
 	var inputState = Bacon.combineTemplate(
 		_.object(_.map(inputs, function(input, key){
 			return [key, {
-				value: input.changes.toProperty(input.el.val()),
+				value: input.changes.map('.value').toProperty(input.el.val()),
 				required: input.required
 			}]
 		}))
@@ -91,8 +104,9 @@ require(['bootstrap', 'jquery', 'Bacon', 'underscorejs', './receiptsList'], func
 			success: function(receipt){
 				receiptsList.add(receipt)
 				_.forEach(inputs, function(input){
-					input.el.val('')
+					input.clear()
 				})
+				inputs.location.el.focus()
 			}
 		})
 	})
