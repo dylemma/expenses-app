@@ -4,7 +4,6 @@
 
 # Home page
 GET     /                           controllers.Application.index
-GET     /submit                     controllers.Application.submit
 
 GET     /receipts                   controllers.Application.listReceipts
 POST    /receipts                   controllers.Application.postReceipt

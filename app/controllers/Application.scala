@@ -17,11 +17,7 @@ import org.joda.time.DateTime
 object Application extends Controller {
 
 	def index = Action {
-		Ok(views.html.index("Your new application is ready."))
-	}
-
-	def submit = Action {
-		Ok(views.html.submit())
+		Ok(views.html.receipts())
 	}
 
 	def postReceipt = Action(parse.json) { request =>
